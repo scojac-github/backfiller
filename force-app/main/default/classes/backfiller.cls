@@ -3,14 +3,14 @@ global class backfiller implements Database.Batchable<sObject> {
     String query;
 
     global backfiller(String q) {
-        query = ;
+        query = q;
     }
 
     global Database.QueryLocator start(Database.BatchableContext BC) {
         return Database.getQueryLocator(query);
     }
 
-    global void execute(Databse.BatchableContext BC, List<sObject> scope) {
+    global void execute(Database.BatchableContext BC, List<sObject> scope) {
 
         try{
             update scope;
@@ -25,8 +25,8 @@ global class backfiller implements Database.Batchable<sObject> {
         // Nothing to do here
     }
 
-    global static void start(string q, integer batchsize) {
-        if (batchsize == null || batchsize == 0) batchsize = 200;
+    global static void start(string q, integer batchSize) {
+        if (batchSize == null || batchSize == 0) batchSize = 200;
         Database.executeBatch (new backfiller(q), batchSize);
     }
 }

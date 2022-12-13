@@ -1,8 +1,8 @@
-@is@TestSetup
-private class backfiller {
-    @isTest static void backfillerTest() {
-        insert new Account(Name = 'Fake Account');
-        string q = 'SELECT Id FROM Account';
-        backfiller.start(q, null);
+@isTest
+private class backfillerTest {
+    @isTest static void test_backfiller() {
+        Insert new Account(Name = 'Fake Account');
+        String qry = 'SELECT Id FROM Account';
+        backfiller.start(qry, 200);
     }
 }
