@@ -1,18 +1,17 @@
-# Salesforce DX Project: Next Steps
+# Backfiller 🚜
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Imagine you've created a new piece of automation that will use some logic to populate a new field on a Salesforce record. How do you force all records to update to populate this new field? Backfiller to the rescue.
 
-## How Do You Plan to Deploy Your Changes?
+A simple Batch Apex class to update the records you define.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## How to
 
-## Configure Your Salesforce DX Project
+In this example, we'll use Anonymous Apex to call Backfiller to update all Cases in our org. We'll start by using a SOQL query to define the records to update (only an Id field is needed). Next we'll set the batch size (or leave blank and it will set to system default batch size of 200). Finally, we'll execute the batch.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+`
+String myQuery = 'SELECT Id FROM Case'
 
-## Read All About It
+Integer batchSize = 99;
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+Backfiller.Start(myQuery, batchSize);
+`
